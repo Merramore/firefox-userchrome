@@ -299,16 +299,16 @@
 /*Ideas for customizable min width?*/
 
 /**************
-*       ##### *
-*       #     *
-*       #     *
-* #  #  ####  *
-* #  #      # *
-* # #      #  *
-*  #    ###   *
+*          ## *
+*         #   *
+*        #    *
+* #  #   ###  *
+* #  #  #   # *
+* # #   #  #  *
+*  #     ##   *
 **************/
 
-@media all { /* version 5 */
+@media all { /* version 6 */
   /* pop out #sidebar-box and #sidebar-splitter, and splitter resizes expanded sidebar */
   /* primary mechanism: z-index and relative/absolute positions */
   /* secondary changes: */
@@ -354,26 +354,16 @@
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
 {
   position: relative;
-  /*z-index: 1;*/
-  min-width: var(--tst-thin-width);
-  max-width: var(--tst-thin-width);
-}
-
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
-{
-  padding-right: var(--tst-splitter-width);
+  z-index: -2;
+  min-width: var(--tst-wide-width);
+  max-width: var(--tst-wide-width);
 }
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
   + #sidebar-splitter
 {
   position: relative;
-  /*z-index: 2;*/
-  /*width: var(--tst-splitter-width) !important; /**/ /* !important because of ".sidebar-splitter { width: 6px; }" from browser.css:3363 */
-  /*min-width: var(--tst-splitter-width) !important; /**/
-  /*max-width: var(--tst-splitter-width) !important; /**/
-  /*padding-left: 1em !important;
-  padding-right: 1em !important;*/
+  z-index: -1
   opacity: 1.0;
   border: 0;
   background-color: #f00;
@@ -382,49 +372,35 @@
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
   + #sidebar-splitter:not(:hover)
 {
-  /*visibility: collapse;*/ /**/
+  visibility: collapse; /**/
 }
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
   ~ #appcontent
 {
-  /*! position: relative; */
-  position: absolute;
-  /*z-index: 3;*/
+  position: relative;
+  /*position: absolute; /**/
+  /*width: calc(100% - var(--tst-thin-width)); /**/
+  min-width: calc(100% - 30px) !important;
+  max-width: calc(100% - 30px) !important;
+  left: 0px !important;
+  margin-left: -40px !important;
+  z-index: 0;
 }
 
 /* expanded */
-
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover 
-{
-  min-width: var(--tst-thin-width);
-  max-width: unset;
-  /*margin-right: calc(-1 * var(--tst-splitter-width)); /**/
-  /*padding-right: var(--tst-splitter-width); /**/
-}
 
 /* Don't collapse when we're adjusting the splitter. /*
 /* It'd be great if we could keep the sidebar exanded, but this ain't it. */
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
   ~#sidebar-splitter,
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
   ~#sidebar-splitter:hover
 {
-  /*margin-left: var(--tst-splitter-margin) !important; /**/
-  /*padding-left: var(--tst-splitter-margin) !important; /**/
-  /*margin-left: 4px !important; /**/
+  z-index: 2;
 }
 
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden]):hover
-  ~#appcontent,
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
-  ~#sidebar-splitter:hover
-    ~#appcontent
-{
-  /*z-index: 0;*/
-}
-
-} /* version 5 */
+} /* version 6 */
 
 
 /* source: https://www.reddit.com/r/FirefoxCSS/comments/71vbds/revert_the_tab_throbber_in_firefox_57/ */
