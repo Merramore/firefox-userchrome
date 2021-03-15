@@ -1,0 +1,199 @@
+@media none {/*default*/
+
+/* Show title of unread tabs with red and italic font */
+/*
+.tab.unread .label {
+  color: red !important;
+  font-style: italic !important;
+}
+*/
+
+/* Add private browsing indicator per tab */
+/*
+.tab.private-browsing .label:before {
+  content: "🕶";
+}
+*/
+
+} /*default*/
+
+@media all { /* Custom theme [1] */
+  /* source: https://www.reddit.com/r/FirefoxCSS/comments/7emhsq/my_compact_treestyletab_css_and_sidebar_hover/ */
+  /* modified by [AM] for personal use */
+
+/* Hide .twisty and adjust margins so favicons have 7px on left. */
+@media none {
+.tab .twisty {
+    visibility: hidden;
+    margin-left: -12px;
+}
+}
+
+.tab .twisty {
+    margin-left: -7px;
+    margin-right: -3px;
+    font-size: 4.5pt;
+}
+
+/* Push tab labels slightly to the right so they're completely hidden in collapsed state */
+.tab .label {
+    margin-left: 7px;
+    mask-image: linear-gradient(to left, transparent, black 30px);
+}
+@media none {
+.tab .label::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    right: 0px;
+    background-image: linear-gradient(to left, var(--tab-bgcolor) 0, var(--tab-bgcolor));
+}
+}
+
+/* Hide close buttons on tabs. */
+.tab .closebox {
+    visibility: collapse;
+}
+
+/* Hide sound playing/muted button. */
+.sound-button::before {
+    display: none !important;
+}
+
+/* Hide 'new tab' button. */
+.newtab-button {
+    display: none;
+}
+
+scrollbar {
+    visibility: collapse;
+    transform: scaleX(-1);
+}
+
+@media  {
+#tabbar {
+    /* [AM] Hide the native scrollbar (to the right). 
+       Unfortunately, this requires a nasty trick, as I can't seem to modify them with CSS.
+       Ideally, I could just replace it with a very thin, dark scrollbar. Oh well; TODO.
+       This width is valid for my settings on Firefox 57.0.4 / Ubuntu 16.04 LTS */
+    position: relative;
+    --scrollbar-width: 8px;
+    --scrollbar-width-negative: calc(-1 * var(--scrollbar-width));
+    left: var(--scrollbar-width-negative);
+    margin-left: var(--scrollbar-width);
+    margin-right: var(--scrollbar-width-negative);
+}
+}
+@media  {/* Hide the scrollbar altogether */
+#tabbar {
+    position: absolute;
+    margin-right: 0;
+}
+}
+
+/* ################################################ */
+/* ##### COLOR THEME ############################## */
+/* ################################################ */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes pulse {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+    }
+    100% {
+        width: 350px;
+        height: 350px;
+        opacity: 0;
+        top: calc(50% - 175px);
+        left: calc(50% - 175px);
+    }
+}
+:root {
+    background-color: #1d1d1d;
+}
+#tabbar {
+    border-right: 1px solid #1d1d1d;
+    box-shadow: none !important;
+}
+#tabbar:not(:hover) {
+}
+.tab {
+    background-color: #383838;
+    border-color: #555;
+    color: rgba(255,255,255,0.75);
+    box-shadow: none !important;
+    /*! padding-top: 4px; */
+    /*! padding-bottom: 4px; */
+}
+.tab:hover {
+    background-color: #292929 !important;
+    color: rgba(255,255,255,1) !important;
+}
+.tab.discarded {
+    background-color: #1d1d1d;
+    color: rgba(255,255,255,0.5) !important;
+}
+.tab.discarded:hover {
+    background-color: #292929 !important;
+    color: rgba(255,255,255,0.625);
+}
+.tab.active {
+    --active-bg-color: #6D5887; /*#a87676;*/ /*#afa876; original (green)*/
+    background-color: var(--active-bg-color);
+}
+.tab.active:hover {
+    background-color: var(--active-bg-color) !important;
+}
+
+
+:not(:hover):root #tabbar:not(:hover) .tab {
+    margin-left: 0px;
+}
+.tab {
+    --tab-margin-left-proxy: var(margin-left);
+}
+.tab::before {
+    position: absolute;
+    width: var(--tab-margin-left-proxy);
+    height: 100%;   
+}
+
+
+/* Adjust style for tab that has sound playing. */
+.tab.sound-playing .favicon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    background: #FFFFFF;
+    animation: pulse 2s ease-out 0s infinite;
+    z-index: -1;
+    opacity: 0;
+}
+
+/* Adjust style for tab that is muted. */
+.tab.muted {
+    opacity: 0.5;
+}
+
+} /* adapted from (...) [1]*/
+
+
+#tabContextMenu #context_reloadAllTabs,
+/*#tabContextMenu #context_bookmarkAllTabs,*/
+#tabContextMenu #context_closeTabsToTheEnd,
+#tabContextMenu #context_closeOtherTabs
+{
+  display: none !important;
+}
+

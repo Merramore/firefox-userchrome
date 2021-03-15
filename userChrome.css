@@ -1,0 +1,454 @@
+.tabbrowser-tab[pending=true] {opacity: .5;}
+.tabbrowser-tabs[treestyletab-tabbar-autohide] .tabbrowser-tab          {opacity: 0.85  !important;} /*TST default*/
+.tabbrowser-tabs[treestyletab-tabbar-autohide] .tabbrowser-tab[pending] {opacity: 0.625 !important;}
+
+#TabsToolbar {
+  /*! display: none !important; */
+  position: fixed !important;
+  opacity: 0 !important;
+  z-index: -1 !important;
+}
+
+/* Rule added 2018-04-05 07:55 to fix bug encountered 2018-04-04 ~07:30:
+    Menu items to hide bookmark toolbar, etc., do not populate, by toolbar context manu nor by "customize" screen.
+    This happens on a fresh profile as well as a storied profile.
+*/
+/*#PersonalToolbar {
+  display: none !important;
+}*/
+
+/* Rule added 2018-11-15 07:55:
+    Bad dragging hitbox obscuring content. No patience for proper fix. Must go.
+*/
+#titlebar {
+  /* display: none !important; */
+  margin-top: -28px;
+  z-index: -1;
+}
+#main-window[sizemode=fullscreen] #titlebar {
+}
+
+#main-window[sizemode=fullscreen] #titlebar > #TabsToolbar {
+  /* display: none !important; */
+  opacity: 1;
+}
+#main-window[sizemode=fullscreen] #titlebar > #TabsToolbar > * {
+  opacity: 0;
+}
+
+#main-window[sizemode=normal] #nav-bar {
+  position: relative !important;
+  /*padding-right: 12em !important;*/
+  padding-right: 2em !important;
+}
+#main-window[sizemode=fullscreen] #nav-bar {
+  position: relative !important;
+  padding-right: 2em !important;
+}
+
+#nav-bar > #window-controls {
+  display: inherit !important;
+  margin-left: 3em !important;
+  margin-right: -12em !important;
+}
+#TabsToolbar > #window-controls {
+  display: inherit !important;
+  /*position: relative !important;*/
+  /*margin-top: 60px !important;*/
+  margin-left: 3em !important;
+  opacity: 1 !important;
+}
+
+
+@-moz-document url(chrome://browser/content/browser.xul) {
+  @font-face {
+    font-family: URLBarCustom;
+    src: local("Segoe UI"); /* Windows 7 */
+  }
+  /* Use Courier New for everything after "~" */
+  @font-face {
+    font-family: URLBarCustom;
+    src: local("Courier New"); /* Windows 7 */
+    unicode-range: U+07F-FFFF;
+  }
+  #urlbar .urlbar-input-box {
+    font-family: URLBarCustom !important;
+  }
+}
+
+
+/*[AM] What's that blank space doing there, anyway?*/
+.titlebar-placeholder[type="pre-tabs"] {
+  width: 10px
+}
+
+
+
+/********************
+*                   *
+*   S I D E B A R   *
+*                   *
+********************/
+
+@media 0 {
+
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+{
+  display: flex;
+  justify-content: ;
+  align-items: stretch;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header
+{
+  
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar
+{
+  width: 100%;
+}
+
+}
+
+/*****************
+* SIDEBAR HEADER *
+*****************/
+
+/* Minimize sidebar header to a light blue stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
+
+@media 0 { /* Sidebar too narrow for expanded header: temporarily widen sidebar */
+
+/* collapsed */
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:not(:hover)
+{
+  position: relative;
+  /*! opacity: 0.5; */
+  z-index: 1;
+  /*! width: 100%; */
+  min-width: 100%;
+  max-width: 100%;
+  /*! height: 5px; */
+  max-height: 5px !important;
+  min-height: 5px !important;
+  padding: 0 !important;
+  background-color: #7ad;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header
+    +#sidebar
+{
+  position: absolute;
+  z-index: 2;
+  margin-top: 0px;
+}
+
+/* expanded */
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:hover
+{
+  position: relative;
+  z-index: 1;
+  min-height: 25px !important;
+  max-height: 43px !important;
+  margin-bottom: -38px;
+  /*! min-width: 100%; */
+  /*! max-width: unset; */
+  /*! overflow-x: hidden; */
+  background-color: #fff;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:hover
+    +#sidebar
+{
+  z-index: 0;
+}
+
+}
+
+@media  { /* Sidebar too narrow for expanded header: hide under / hover over content */
+
+/* collapsed */
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:not(:hover)
+{
+  position: absolute;
+  z-index: 1;
+  /*! opacity: 0.5; */
+  /*! width: 100%; */
+  min-width: 100%;
+  max-width: 100%;
+  /*! height: 5px; */
+  max-height: 5px !important;
+  min-height: 5px !important;
+  /*! padding: 0 !important; */
+  background-color: #7ad;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header
+    +#sidebar
+{
+  position: relative;
+  z-index: 2;
+  margin-top: 5px;
+}
+
+/* expanded */
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:hover
+{
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 96px;
+  max-width: unset;
+  min-width: 100%; /* These two lines uncommented: header hides under content */
+  max-width: 100%; /* These two lines   commented: header hovers over content */
+  min-height: 25px !important;
+  /*! max-height: 25px !important; */
+  background-color: #fff;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
+  #sidebar-header:hover
+    #sidebar-switcher-target
+{
+  flex-flow: 1 1 auto;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
+  #sidebar-header:hover
+    #sidebar-close
+{
+  flex-flow: 0 0 auto;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:hover
+    +#sidebar
+{
+  z-index: 0;
+}
+
+}
+
+
+/* hide children when collapsed, but in a convoluted way */
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header
+    >*
+{
+  /*! display: inline-block; */
+  display: inline-block;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:not(:hover)
+    >*:not(#sidebar-switcher-target),
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:not(:hover)
+    >*:not(#sidebar-switcher-target)
+      *
+{
+  /* BAD NEWS: display: none !important; */
+  /*! opacity: 0 !important; */
+  /* [AM] I don't see what's so bad? Maybe my sidebar collapse makes it okay? */
+  /*! display: none !important; */
+  visibility: collapse !important;
+  /*! visibility: hidden !important; */
+  /*! visibility: unset !important; */
+  /*! position: absolute; */
+  /*! pointer-events: none; */
+  /*! min-width: 0px !important; */
+  /*! max-width: 0px !important; */
+  /*! min-height:  0px !important; */
+  /*! max-height: 1px !important; */
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:not(:hover)
+    #sidebar-switcher-target,
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header:not(:hover)
+    #sidebar-switcher-target *
+{
+  /* BAD NEWS: display: none !important; */
+  opacity: 0 !important;
+  /* [AM] I don't see what's so bad? Maybe my sidebar collapse makes it okay? */
+  /*! display: none !important; */
+  position: absolute;
+  pointer-events: none;
+  /*! visibility:  collapse !important; */
+  /*! visibility:   hidden !important; */
+  /*! visibility:   unset !important; */
+  /*! min-width:     0px !important; */
+  /*! max-width:    0px !important; */
+  /*! min-height:  0px !important; */
+  /*! max-height: 1px !important; */
+}
+
+#sidebarMenu-popup[panelopen]
+{
+  
+}
+
+
+/*                                                    *\
+** --~~==** [AM] minimize whole sidebar, too **+=~~-- **
+\*                                                    */
+
+/*Ideas for customizable min width?*/
+
+/**************
+*       ##### *
+*       #     *
+*       #     *
+* #  #  ####  *
+* #  #      # *
+* # #      #  *
+*  #    ###   *
+**************/
+
+@media all { /* version 5 */
+  /* pop out #sidebar-box and #sidebar-splitter, and splitter resizes expanded sidebar */
+  /* primary mechanism: z-index and relative/absolute positions */
+  /* secondary changes: */
+  /*  position splitter over sidebar, rather than beside it */
+
+:root {
+  --tst-thin-width: calc(30px + 1em);
+  --tst-wide-width: 200px;
+}
+:root {
+  --tst-splitter-width: 1em;
+  --tst-splitter-margin: calc(var(--tst-wide-width) - var(--tst-thin-width) + 3em);
+}
+
+/* remove max/min width by default */
+/* they're set in element style directly, thus !important */
+#sidebar {
+  min-width: unset !important;
+  max-width: unset !important;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+  #sidebar-header
+{
+  background-color: #555 !important;
+  border-color: #555 !important;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+  #sidebar-header:hover
+{
+  background-color: #aaa !important;
+}
+
+/* this is necessary for the absolute children */
+#browser 
+{
+  position: relative;
+}
+
+/* default / collapsed */
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+{
+  position: relative;
+  /*z-index: 1;*/
+  min-width: var(--tst-thin-width);
+  max-width: var(--tst-thin-width);
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
+{
+  padding-right: var(--tst-splitter-width);
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+  + #sidebar-splitter
+{
+  position: relative;
+  /*z-index: 2;*/
+  /*width: var(--tst-splitter-width) !important; /**/ /* !important because of ".sidebar-splitter { width: 6px; }" from browser.css:3363 */
+  /*min-width: var(--tst-splitter-width) !important; /**/
+  /*max-width: var(--tst-splitter-width) !important; /**/
+  /*padding-left: 1em !important;
+  padding-right: 1em !important;*/
+  opacity: 1.0;
+  border: 0;
+  background-color: #f00;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+  + #sidebar-splitter:not(:hover)
+{
+  /*visibility: collapse;*/ /**/
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
+  ~ #appcontent
+{
+  /*! position: relative; */
+  position: absolute;
+  /*z-index: 3;*/
+}
+
+/* expanded */
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover 
+{
+  min-width: var(--tst-thin-width);
+  max-width: unset;
+  /*margin-right: calc(-1 * var(--tst-splitter-width)); /**/
+  /*padding-right: var(--tst-splitter-width); /**/
+}
+
+/* Don't collapse when we're adjusting the splitter. /*
+/* It'd be great if we could keep the sidebar exanded, but this ain't it. */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
+  ~#sidebar-splitter,
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+  ~#sidebar-splitter:hover
+{
+  /*margin-left: var(--tst-splitter-margin) !important; /**/
+  /*padding-left: var(--tst-splitter-margin) !important; /**/
+  /*margin-left: 4px !important; /**/
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden]):hover
+  ~#appcontent,
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
+  ~#sidebar-splitter:hover
+    ~#appcontent
+{
+  /*z-index: 0;*/
+}
+
+} /* version 5 */
+
+
+/* source: https://www.reddit.com/r/FirefoxCSS/comments/71vbds/revert_the_tab_throbber_in_firefox_57/ */
+/* Revert tab throbber - for Nightly 57 as of 9/20/2017 */
+.tab-throbber[busy]::before {
+  background-image: url("chrome://global/skin/icons/loading.png") !important;
+  animation: unset !important;
+}
+.tab-throbber[busy]:not([progress])::before {
+  /* Grays the blue during "Connecting" state */
+  filter: grayscale(100%);
+}
+@media (min-resolution: 2dppx) {
+  .tab-throbber[busy]::before {
+    background-image: url("chrome://global/skin/icons/loading@2x.png") !important;
+  }
+}
+
+
+/*[AM]*/
+#tabContextMenu #context_reloadAllTabs,
+#tabContextMenu #context_bookmarkAllTabs,
+#tabContextMenu #context_closeTabsToTheEnd,
+#tabContextMenu #context_closeOtherTabs
+{
+  display: none !important;
+}

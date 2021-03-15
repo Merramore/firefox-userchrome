@@ -1,0 +1,16 @@
+/*[AM]*/
+@media all {
+
+#tabContextMenu #context_reloadAllTabs,
+/*#tabContextMenu #context_bookmarkAllTabs,*/
+#tabContextMenu #context_closeTabsToTheEnd,
+#tabContextMenu #context_closeOtherTabs
+{
+  display: none !important;
+}
+
+/*scrollbar {
+	visibility: collapse;
+}*/
+
+}
