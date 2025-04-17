@@ -61,6 +61,11 @@
 }
 
 
+#navigator-toolbox {
+  z-index: 3; /* Avoid browser content drop shadow (in sidebar styles below). */
+}
+
+
 @-moz-document url(chrome://browser/content/browser.xul) {
   @font-face {
     font-family: URLBarCustom;
@@ -361,6 +366,7 @@
 
 #sidebar-wrapper ~ #tabbrowser-tabbox {
   /*margin-left: var(--tst-thin-width) !important;/**/
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
 }
 
 #sidebar-wrapper:not(:hover) ~ #tabbrowser-tabbox {
@@ -385,6 +391,12 @@
   z-index: 0 !important;
 }
 
+#sidebar-splitter::after {
+  width: 1px;
+  height: 100%;
+  box-shadow: 5px 0px 25px black inset;
+}
+
 /* == default == */
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
@@ -396,6 +408,7 @@
   /*margin-right: calc(0*-var(--tst-overlap-margin)));*/
   /*margin-right: calc(-1%);*/
   /*margin-right: attr(width px, 100px);/**/
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
   transition: width        0.6s cubic-bezier(0.37, 0, 0.63, 1);
   transition: min-width    0.6s cubic-bezier(0.37, 0, 0.63, 1);
   transition: max-width    0.6s cubic-bezier(0.37, 0, 0.63, 1);
