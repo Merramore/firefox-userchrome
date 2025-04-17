@@ -22,10 +22,11 @@
 */
 #titlebar {
   /* display: none !important; */
-  margin-top: -28px;
+  /*! margin-top: -28px; */
   z-index: -1;
 }
 #main-window[sizemode=fullscreen] #titlebar {
+  margin-top: 0px;
 }
 
 #main-window[sizemode=fullscreen] #titlebar > #TabsToolbar {
@@ -119,7 +120,15 @@
 
 @media 0 { /* Sidebar too narrow for expanded header: temporarily widen sidebar */
 
-/* collapsed */
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
+  #sidebar-header
+{
+  transition:     height 0.6s !important cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: min-height 0.6s !important cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: max-height 0.6s !important cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+  /* collapsed */
 #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) 
   #sidebar-header:not(:hover)
 {
@@ -288,7 +297,7 @@
 
 #sidebarMenu-popup[panelopen]
 {
-  
+  /**/
 }
 
 
@@ -346,46 +355,46 @@
 /* this is necessary for the absolute children */
 #browser 
 {
-  position: relative;
+  position: relative !important;
 }
 
 /* default / collapsed */
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
 {
-  position: relative;
-  z-index: -2;
-  min-width: var(--tst-wide-width);
-  max-width: var(--tst-wide-width);
+  position: relative !important;
+  z-index: -2 !important;
+  min-width: var(--tst-wide-width) !important;
+  max-width: var(--tst-wide-width) !important;
 }
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
   + #sidebar-splitter
 {
-  position: relative;
-  z-index: -1
-  opacity: 1.0;
-  border: 0;
-  background-color: #f00;
+  position: relative !important;
+  z-index: -1 !important;
+  opacity: 1.0 !important;
+  border: 0 !important;
+  background-color: #f00 !important;
 }
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
   + #sidebar-splitter:not(:hover)
 {
-  visibility: collapse; /**/
+  visibility: collapse !important; /**/
 }
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
   ~ #appcontent
 {
-  position: relative;
-  /*position: absolute; /**/
-  /*width: calc(100% - var(--tst-thin-width)); /**/
+  position: relative !important;
+  /*position: absolute !important; /**/
+  /*width: calc(100% - var(--tst-thin-width)) !important; /**/
   min-width: calc(100% - 30px) !important;
   max-width: calc(100% - 30px) !important;
   left: 0px !important;
   margin-left: -40px !important;
-  z-index: 0;
+  z-index: 0 !important;
 }
 
 /* expanded */
