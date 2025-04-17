@@ -308,13 +308,13 @@
 /*Ideas for customizable min width?*/
 
 /**************
-*          ## *
-*         #   *
-*        #    *
-* #  #   ###  *
-* #  #  #   # *
-* # #   #  #  *
-*  #     ##   *
+*       ##### *
+*           # *
+*          #  *
+* #  #    #   *
+* #  #   #    *
+* # #    #    *
+*  #     #    *
 **************/
 
 @media all { /* version 6 */
@@ -328,8 +328,9 @@
   --tst-wide-width: 200px;
 }
 :root {
-  --tst-splitter-width: 1em;
-  --tst-splitter-margin: calc(var(--tst-wide-width) - var(--tst-thin-width) + 3em);
+  --tst-splitter-width: 6px;
+  --tst-overlap-width: 1em;
+  --tst-overlap-margin: 200px;
 }
 
 /* remove max/min width by default */
@@ -358,32 +359,19 @@
   position: relative !important;
 }
 
-/* default / collapsed */
-
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
-{
-  position: relative !important;
-  z-index: -2 !important;
-  min-width: var(--tst-wide-width) !important;
-  max-width: var(--tst-wide-width) !important;
+#sidebar-wrapper ~ #tabbrowser-tabbox {
+  /*margin-left: var(--tst-thin-width) !important;/**/
 }
 
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
-  + #sidebar-splitter
-{
-  position: relative !important;
-  z-index: -1 !important;
-  opacity: 1.0 !important;
-  border: 0 !important;
-  background-color: #f00 !important;
+#sidebar-wrapper:not(:hover) ~ #tabbrowser-tabbox {
+  /*margin-left: var(--tst-thin-width) !important;/**/
 }
 
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
-  + #sidebar-splitter:not(:hover)
-{
-  visibility: collapse !important; /**/
+#sidebar-wrapper:hover ~ #tabbrowser-tabbox {
+  /*margin-left: var(--tst-thin-width) !important;/**/
 }
 
+/* children */
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
   ~ #appcontent
 {
@@ -397,19 +385,78 @@
   z-index: 0 !important;
 }
 
-/* expanded */
+/* == default == */
 
-/* Don't collapse when we're adjusting the splitter. /*
-/* It'd be great if we could keep the sidebar exanded, but this ain't it. */
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
-  ~#sidebar-splitter,
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
-  ~#sidebar-splitter:hover
 {
-  z-index: 2;
+  /**/position: absolute !important; /**/
+  height: 100%;
+  /**/margin-left: var(--tst-splitter-width);/**/
+  /*margin-left: calc(0*-var(--tst-overlap-margin));*/
+  /*margin-right: calc(0*-var(--tst-overlap-margin)));*/
+  /*margin-right: calc(-1%);*/
+  /*margin-right: attr(width px, 100px);/**/
+  transition: width        0.6s cubic-bezier(0.37, 0, 0.63, 1);
+  transition: min-width    0.6s cubic-bezier(0.37, 0, 0.63, 1);
+  transition: max-width    0.6s cubic-bezier(0.37, 0, 0.63, 1);
+  transition: margin-right 0.6s cubic-bezier(0.37, 0, 0.63, 1);
 }
 
-} /* version 6 */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+  + #sidebar-splitter
+{
+  /*position: absolute !important; /**/
+  height: 100%;
+  /**/margin-right: calc(var(--tst-thin-width) - var(--tst-splitter-width)*0);/**/
+  /*margin-left: var(--tst-thin-width);/**/
+  /*margin-left: calc(0*-var(--tst-overlap-margin));*/
+  /*margin-right: calc(-1*var(--tst-overlap-margin));*/
+  opacity: 1.0 !important;
+  border: 0 !important;
+  /*background-color: #f00 !important; /**/ /* for visibility during debugging */
+  transition: margin-right 0.6s cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+/* == collapsed == */
+
+#sidebar-wrapper:not(:hover)
+  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+{
+  /*    width: var(--tst-thin-width) !important;*/
+  min-width: var(--tst-thin-width) !important;
+  /*max-width: var(--tst-thin-width) !important;*/
+  z-index: 0 !important;
+}
+
+#sidebar-wrapper:not(:hover)
+  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+  + #sidebar-splitter:not(:hover)
+{
+  z-index: 0 !important;
+}
+
+/* == expanded == */
+
+/* Don't collapse when we're adjusting the splitter. /*
+/* It'd be great if we could keep the sidebar expanded, but this ain't it. */
+#sidebar-wrapper:hover
+  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+{
+  /*    width: var(--tst-wide-width) !important;*/
+  /*min-width: var(--tst-wide-width) !important;*/
+  /*max-width: var(--tst-wide-width) !important;*/
+  z-index: 10 !important;
+}
+
+#sidebar-wrapper:hover
+  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+  ~ #sidebar-splitter
+{
+  z-index: 10 !important;
+  /*visibility: none !important;/**/
+}
+
+} /* version 7 */
 
 
 /* source: https://www.reddit.com/r/FirefoxCSS/comments/71vbds/revert_the_tab_throbber_in_firefox_57/ */
