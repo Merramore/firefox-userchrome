@@ -435,8 +435,7 @@
 
 /* == collapsed == */
 
-#sidebar-wrapper:not(:hover)
-  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
 {
   /*    width: var(--tst-thin-width) !important;*/
   min-width: var(--tst-thin-width) !important;
@@ -444,8 +443,7 @@
   z-index: 0 !important;
 }
 
-#sidebar-wrapper:not(:hover)
-  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not(:hover)
   + #sidebar-splitter:not(:hover)
 {
   z-index: 0 !important;
@@ -455,8 +453,7 @@
 
 /* Don't collapse when we're adjusting the splitter. /*
 /* It'd be great if we could keep the sidebar expanded, but this ain't it. */
-#sidebar-wrapper:hover
-  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
 {
   /*    width: var(--tst-wide-width) !important;*/
   /*min-width: var(--tst-wide-width) !important;*/
@@ -464,8 +461,7 @@
   z-index: 10 !important;
 }
 
-#sidebar-wrapper:hover
-  > #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover
   ~ #sidebar-splitter
 {
   z-index: 10 !important;
