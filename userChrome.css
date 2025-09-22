@@ -1,3 +1,15 @@
+/*
+userChrome by [AM]
+
+v7.4.0 2025-09-22
+Written for:
+  Firefox 143.0.1 (64-bit)
+  Mozilla Firefox Snap for Ubuntu
+  cannonical-002 - 1.0
+*/
+
+
+
 .tabbrowser-tab[pending=true] {opacity: .5;}
 .tabbrowser-tabs[treestyletab-tabbar-autohide] .tabbrowser-tab          {opacity: 0.85  !important;} /*TST default*/
 .tabbrowser-tabs[treestyletab-tabbar-autohide] .tabbrowser-tab[pending] {opacity: 0.625 !important;}
@@ -503,3 +515,10 @@
 {
   display: none !important;
 }
+
+
+
+/*
+userChrome by [AM]
+end
+/*
