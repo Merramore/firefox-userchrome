@@ -329,14 +329,18 @@
   /*  position splitter over sidebar, rather than beside it */
 
 :root {
-  --tst-thin-width: calc(30px + 1em);
+  --tst-splitter-width: 6px;
+  --tst-thin-width: 28px;
   --tst-wide-width: 200px;
   --tst-hover-delay: 0.2s;
-}
-:root {
-  --tst-splitter-width: 6px;
+  /*
   --tst-overlap-width: 1em;
   --tst-overlap-margin: 200px;
+  */
+}
+:root {
+  --tst-total-thin-width: calc(var(--tst-thin-width) + var(--tst-splitter-width));
+  --tst-total-wide-width: calc(var(--tst-wide-width) + var(--tst-splitter-width));
 }
 
 /* remove max/min width by default */
@@ -380,15 +384,15 @@
 
 /* children */
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])
-  ~ #appcontent
+  ~ #tabbrowser-tabbox
 {
   position: relative !important;
   /*position: absolute !important; /**/
-  /*width: calc(100% - var(--tst-thin-width)) !important; /**/
-  min-width: calc(100% - 30px) !important;
-  max-width: calc(100% - 30px) !important;
-  left: 0px !important;
-  margin-left: -40px !important;
+  --tst-sitecontent-width: calc(100% - var(--tst-total-thin-width));
+      width: var(--tst-sitecontent-width) !important;
+  min-width: var(--tst-sitecontent-width) !important;
+  max-width: var(--tst-sitecontent-width) !important;
+  margin-left: var(--tst-total-thin-width) !important;
   z-index: 0 !important;
 }
 
@@ -402,9 +406,9 @@
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]
 {
-  /**/position: absolute !important; /**/
+  position: absolute !important;
   height: 100%;
-  /**/margin-left: var(--tst-splitter-width);/**/
+  margin-left: var(--tst-splitter-width);
   /*margin-left: calc(0*-var(--tst-overlap-margin));*/
   /*margin-right: calc(0*-var(--tst-overlap-margin)));*/
   /*margin-right: calc(-1%);*/
@@ -422,8 +426,11 @@
 {
   /*position: absolute !important; /**/
   height: 100%;
-  /**/margin-right: calc(var(--tst-thin-width) - var(--tst-splitter-width)*0);/**/
-  /*margin-left: var(--tst-thin-width);/**/
+      width: var(--tst-splitter-width) !important;
+  min-width: var(--tst-splitter-width) !important;
+  max-width: var(--tst-splitter-width) !important;
+  /*margin-right: var(--tst-thin-width); /**/
+  /*margin-left: var(--tst-thin-width)/; /**/
   /*margin-left: calc(0*-var(--tst-overlap-margin));*/
   /*margin-right: calc(-1*var(--tst-overlap-margin));*/
   opacity: 1.0 !important;
